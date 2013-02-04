@@ -23,21 +23,7 @@ function print_usage()
 
 check_sql
 
-
-
-if [ -z "$1" ]; then
-	print_usage
-	exit -1
-fi
-if [ -z "$2" ]; then
-	print_usage
-	exit -1
-fi
-
-if [ -z "$3" ]; then
-	print_usage
-	exit -1
-fi
+print_usage
 
 mysql -h$host -u$user -p$pass < build_db.sql
 
