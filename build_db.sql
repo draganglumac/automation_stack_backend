@@ -15,11 +15,6 @@ CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`machines` (
   `machine_callsign` VARCHAR(45) NULL ,
   `machine_ip` VARCHAR(45) NOT NULL ,
   `supported_platforms` VARCHAR(45) NULL ,
-  `iphone4` INT NOT NULL ,
-  `iphone4s` INT NOT NULL ,
-  `iphone5` INT NOT NULL ,
-  `ipadmini` INT NOT NULL ,
-  `ipad4` INT NOT NULL ,
   PRIMARY KEY (`machine_id`) )
 ENGINE = InnoDB;
 
@@ -79,7 +74,64 @@ CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`analytics` (
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
-USE `AUTOMATION` ;
+
+-- -----------------------------------------------------
+-- Table `AUTOMATION`.`Platform`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `AUTOMATION`.`Platform` ;
+
+CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`Platform` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AUTOMATION`.`devices`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `AUTOMATION`.`devices` ;
+
+CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`devices` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `model` VARCHAR(45) NULL ,
+  `serial_number` VARCHAR(45) NULL ,
+  `phone_number` VARCHAR(45) NULL ,
+  `Platform_id` INT NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_devices_Platform1_idx` (`Platform_id` ASC) ,
+  CONSTRAINT `fk_devices_Platform1`
+    FOREIGN KEY (`Platform_id` )
+    REFERENCES `AUTOMATION`.`Platform` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AUTOMATION`.`connected_devices`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `AUTOMATION`.`connected_devices` ;
+
+CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`connected_devices` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `machines_machine_id` INT NOT NULL ,
+  `devices_id` INT NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_connected_devices_machines1_idx` (`machines_machine_id` ASC) ,
+  INDEX `fk_connected_devices_devices1_idx` (`devices_id` ASC) ,
+  CONSTRAINT `fk_connected_devices_machines1`
+    FOREIGN KEY (`machines_machine_id` )
+    REFERENCES `AUTOMATION`.`machines` (`machine_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_connected_devices_devices1`
+    FOREIGN KEY (`devices_id` )
+    REFERENCES `AUTOMATION`.`devices` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
