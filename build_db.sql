@@ -35,40 +35,16 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `AUTOMATION`.`devices`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `AUTOMATION`.`devices` ;
-
-CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`devices` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `model` VARCHAR(45) NULL DEFAULT NULL ,
-  `serial_number` VARCHAR(45) NULL DEFAULT NULL ,
-  `phone_number` VARCHAR(45) NULL DEFAULT NULL ,
-  `platform_id` INT(11) NOT NULL ,
-  `type` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_devices_Platform1_idx` (`platform_id` ASC) ,
-  CONSTRAINT `fk_devices_Platform1`
-    FOREIGN KEY (`platform_id` )
-    REFERENCES `AUTOMATION`.`platform` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-AUTO_INCREMENT = 303
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
 -- Table `AUTOMATION`.`machines`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `AUTOMATION`.`machines` ;
 
 CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`machines` (
-  `machine_id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `call_sign` VARCHAR(45) NULL DEFAULT NULL ,
   `ip_address` VARCHAR(45) NOT NULL ,
   `platform_id` INT(11) NOT NULL ,
-  PRIMARY KEY (`machine_id`) ,
+  PRIMARY KEY (`id`) ,
   INDEX `fk_machines_platform1_idx` (`platform_id` ASC) ,
   CONSTRAINT `fk_machines_platform1`
     FOREIGN KEY (`platform_id` )
@@ -81,25 +57,49 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
+-- Table `AUTOMATION`.`devices`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `AUTOMATION`.`devices` ;
+
+CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`devices` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `model` VARCHAR(45) NULL DEFAULT NULL ,
+  `serial_number` VARCHAR(45) NULL DEFAULT NULL ,
+  `phone_number` VARCHAR(45) NULL DEFAULT NULL ,
+  `type` VARCHAR(45) NULL ,
+  `platform_id` INT(11) NOT NULL ,
+  PRIMARY KEY (`id`, `platform_id`) ,
+  INDEX `fk_devices_platform1_idx` (`platform_id` ASC) ,
+  CONSTRAINT `fk_devices_platform1`
+    FOREIGN KEY (`platform_id` )
+    REFERENCES `AUTOMATION`.`platform` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 303
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
 -- Table `AUTOMATION`.`connected_devices`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `AUTOMATION`.`connected_devices` ;
 
 CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`connected_devices` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `machine_id` INT(11) NOT NULL ,
+  `machines_id` INT(11) NOT NULL ,
   `devices_id` INT(11) NOT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `fk_connected_devices_machines1_idx` (`machine_id` ASC) ,
+  INDEX `fk_connected_devices_machines1_idx` (`machines_id` ASC) ,
   INDEX `fk_connected_devices_devices1_idx` (`devices_id` ASC) ,
+  CONSTRAINT `fk_connected_devices_machines1`
+    FOREIGN KEY (`machines_id` )
+    REFERENCES `AUTOMATION`.`machines` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_connected_devices_devices1`
     FOREIGN KEY (`devices_id` )
     REFERENCES `AUTOMATION`.`devices` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_connected_devices_machines1`
-    FOREIGN KEY (`machine_id` )
-    REFERENCES `AUTOMATION`.`machines` (`machine_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -118,12 +118,12 @@ CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`jobs` (
   `TIMESTAMP` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
   `command` MEDIUMTEXT NULL DEFAULT NULL ,
   `status` VARCHAR(45) NULL DEFAULT 'INCOMPLETE' ,
-  `machine_id` INT(11) NOT NULL ,
-  PRIMARY KEY (`id`, `machine_id`) ,
-  INDEX `fk_jobs_machines1_idx` (`machine_id` ASC) ,
+  `machines_id` INT(11) NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_jobs_machines1_idx` (`machines_id` ASC) ,
   CONSTRAINT `fk_jobs_machines1`
-    FOREIGN KEY (`machine_id` )
-    REFERENCES `AUTOMATION`.`machines` (`machine_id` )
+    FOREIGN KEY (`machines_id` )
+    REFERENCES `AUTOMATION`.`machines` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
