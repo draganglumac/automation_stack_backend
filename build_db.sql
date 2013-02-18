@@ -153,15 +153,15 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- procedure get_incompleete_jobs
+-- procedure get_incomplete_jobs
 -- -----------------------------------------------------
 
 USE `AUTOMATION`;
-DROP procedure IF EXISTS `AUTOMATION`.`get_incompleete_jobs`;
+DROP procedure IF EXISTS `AUTOMATION`.`get_incomplete_jobs`;
 
 DELIMITER $$
 USE `AUTOMATION`$$
-CREATE DEFINER=`dummy`@`%` PROCEDURE `get_incompleete_jobs`()
+CREATE DEFINER=`dummy`@`%` PROCEDURE `get_incomplete_jobs`()
 BEGIN
 	select * from `AUTOMATION`.`jobs` where `status` = 'INCOMPLETE';
 END$$
@@ -195,7 +195,7 @@ DELIMITER $$
 USE `AUTOMATION`$$
 CREATE DEFINER=`dummy`@`%` PROCEDURE `get_machine_ip_from_id`(id int(11))
 BEGIN
-	select `ip_address` from `machines` where `machine_id` = id;
+	select `ip_address` from `machines` where `id` = id;
 END$$
 
 DELIMITER ;
