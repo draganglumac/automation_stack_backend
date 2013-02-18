@@ -5,6 +5,14 @@ require "sequel"
 DB = Sequel.mysql2("AUTOMATION",:host => "10.65.80.46",:username => "dummy",:password => "dummy")
  
 class Seed
+  
+  def self.clear
+    DB[:results].truncate 
+    DB[:connected_devices].truncate
+    DB[:machines].truncate
+    DB[:jobs].truncate       
+    DB[:platform].truncate
+  end
   def self.run
     
                         

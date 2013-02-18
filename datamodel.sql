@@ -49,7 +49,7 @@ CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`machines` (
   CONSTRAINT `fk_machines_platform1`
     FOREIGN KEY (`platform_id` )
     REFERENCES `AUTOMATION`.`platform` (`id` )
-    ON DELETE CASCADE
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 149
@@ -73,7 +73,7 @@ CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`devices` (
   CONSTRAINT `fk_devices_platform1`
     FOREIGN KEY (`platform_id` )
     REFERENCES `AUTOMATION`.`platform` (`id` )
-    ON DELETE CASCADE
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 303
@@ -95,7 +95,7 @@ CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`connected_devices` (
   CONSTRAINT `fk_connected_devices_machines1`
     FOREIGN KEY (`machines_id` )
     REFERENCES `AUTOMATION`.`machines` (`id` )
-    ON DELETE CASCADE
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_connected_devices_devices1`
     FOREIGN KEY (`devices_id` )
@@ -124,7 +124,7 @@ CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`jobs` (
   CONSTRAINT `fk_jobs_machines1`
     FOREIGN KEY (`machines_id` )
     REFERENCES `AUTOMATION`.`machines` (`id` )
-    ON DELETE CASCADE
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 149
@@ -146,7 +146,7 @@ CREATE  TABLE IF NOT EXISTS `AUTOMATION`.`results` (
   CONSTRAINT `fk_results_jobs1`
     FOREIGN KEY (`jobs_id` )
     REFERENCES `AUTOMATION`.`jobs` (`id` )
-    ON DELETE CASCADE
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
@@ -243,7 +243,7 @@ DELIMITER $$
 USE `AUTOMATION`$$
 CREATE PROCEDURE `AUTOMATION`.`add_machine` (call_sign varchar(11),ip_address varchar(128),platform_id int(11))
 BEGIN
-	
+ 
 END$$
 
 DELIMITER ;
@@ -257,9 +257,9 @@ DROP procedure IF EXISTS `AUTOMATION`.`get_platform_id_by_name`;
 
 DELIMITER $$
 USE `AUTOMATION`$$
-CREATE PROCEDURE `AUTOMATION`.`get_platform_id_by_name` (platform_name varchar(45))
+CREATE PROCEDURE `AUTOMATION`.`get_platform_id_by_name` (name varchar(45))
 BEGIN
-	select `id` from `platform` where `name` = platform_name;
+	select `id` from `platform` where `name` = name;
 END$$
 
 DELIMITER ;
