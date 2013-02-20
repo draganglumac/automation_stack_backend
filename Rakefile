@@ -39,7 +39,14 @@ namespace :db do
     client.query("CREATE DATABASE #{ENV["DATABASE"]};")
     client.close
   end
+               
   
+  desc "Reset"
+  task :reset do
+    Rake::Task['db:drop'].execute
+    Rake::Task['db:create'].execute
+    Rake::Task['db:setup'].execute
+  end
   desc "setup"
   task :setup do  
     
