@@ -6,7 +6,7 @@ require 'sequel'
  
 
 
-ENV["DATABASE"] = "AUTOMATIONTEST"
+ENV["DATABASE"] = "DELANEY"
 ENV["HOST"] = "10.65.80.46"
 ENV["USERNAME"] = "dummy"
 ENV["PASSWORD"] = "dummy"
@@ -45,7 +45,7 @@ namespace :db do
   task :reset do
     Rake::Task['db:drop'].execute
     Rake::Task['db:create'].execute
-    Rake::Task['db:setup'].execute
+    Rake::Task['db:create'].execute
   end
   desc "setup"
   task :setup do  

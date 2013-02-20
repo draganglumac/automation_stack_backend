@@ -2,13 +2,10 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-CREATE SCHEMA IF NOT EXISTS `AUTOMATIONTEST` DEFAULT CHARACTER SET latin1 ;
-USE `AUTOMATIONTEST` ;
-
 -- -----------------------------------------------------
--- Table `AUTOMATIONTEST`.`analytics`
+-- Table `analytics`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `AUTOMATIONTEST`.`analytics` (
+CREATE  TABLE IF NOT EXISTS `analytics` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `DATETIME` TIMESTAMP NULL DEFAULT NULL ,
   `IP` VARCHAR(45) NULL DEFAULT NULL ,
@@ -18,9 +15,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `AUTOMATIONTEST`.`platform`
+-- Table `platform`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `AUTOMATIONTEST`.`platform` (
+CREATE  TABLE IF NOT EXISTS `platform` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) )
@@ -30,9 +27,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `AUTOMATIONTEST`.`machines`
+-- Table `machines`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `AUTOMATIONTEST`.`machines` (
+CREATE  TABLE IF NOT EXISTS `machines` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `call_sign` VARCHAR(45) NULL DEFAULT NULL ,
   `ip_address` VARCHAR(45) NOT NULL ,
@@ -41,7 +38,7 @@ CREATE  TABLE IF NOT EXISTS `AUTOMATIONTEST`.`machines` (
   INDEX `fk_machines_platform1_idx` (`platform_id` ASC) ,
   CONSTRAINT `fk_machines_platform1`
     FOREIGN KEY (`platform_id` )
-    REFERENCES `AUTOMATIONTEST`.`platform` (`id` )
+    REFERENCES `platform` (`id` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -50,9 +47,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `AUTOMATIONTEST`.`devices`
+-- Table `devices`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `AUTOMATIONTEST`.`devices` (
+CREATE  TABLE IF NOT EXISTS `devices` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `model` VARCHAR(45) NULL DEFAULT NULL ,
   `serial_number` VARCHAR(45) NULL DEFAULT NULL ,
@@ -63,7 +60,7 @@ CREATE  TABLE IF NOT EXISTS `AUTOMATIONTEST`.`devices` (
   INDEX `fk_devices_platform1_idx` (`platform_id` ASC) ,
   CONSTRAINT `fk_devices_platform1`
     FOREIGN KEY (`platform_id` )
-    REFERENCES `AUTOMATIONTEST`.`platform` (`id` )
+    REFERENCES `platform` (`id` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -72,9 +69,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `AUTOMATIONTEST`.`connected_devices`
+-- Table `connected_devices`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `AUTOMATIONTEST`.`connected_devices` (
+CREATE  TABLE IF NOT EXISTS `connected_devices` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `machines_id` INT(11) NOT NULL ,
   `devices_id` INT(11) NOT NULL ,
@@ -83,12 +80,12 @@ CREATE  TABLE IF NOT EXISTS `AUTOMATIONTEST`.`connected_devices` (
   INDEX `fk_connected_devices_devices1_idx` (`devices_id` ASC) ,
   CONSTRAINT `fk_connected_devices_machines1`
     FOREIGN KEY (`machines_id` )
-    REFERENCES `AUTOMATIONTEST`.`machines` (`id` )
+    REFERENCES `machines` (`id` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_connected_devices_devices1`
     FOREIGN KEY (`devices_id` )
-    REFERENCES `AUTOMATIONTEST`.`devices` (`id` )
+    REFERENCES `devices` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -97,9 +94,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `AUTOMATIONTEST`.`jobs`
+-- Table `jobs`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `AUTOMATIONTEST`.`jobs` (
+CREATE  TABLE IF NOT EXISTS `jobs` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
   `TIMESTAMP` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
@@ -110,7 +107,7 @@ CREATE  TABLE IF NOT EXISTS `AUTOMATIONTEST`.`jobs` (
   INDEX `fk_jobs_machines1_idx` (`machines_id` ASC) ,
   CONSTRAINT `fk_jobs_machines1`
     FOREIGN KEY (`machines_id` )
-    REFERENCES `AUTOMATIONTEST`.`machines` (`id` )
+    REFERENCES `machines` (`id` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -119,9 +116,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `AUTOMATIONTEST`.`results`
+-- Table `results`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `AUTOMATIONTEST`.`results` (
+CREATE  TABLE IF NOT EXISTS `results` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `testresult` VARCHAR(128) NOT NULL ,
   `DATETIME` TIMESTAMP NULL DEFAULT NULL ,
@@ -130,7 +127,7 @@ CREATE  TABLE IF NOT EXISTS `AUTOMATIONTEST`.`results` (
   INDEX `fk_results_jobs1_idx` (`jobs_id` ASC) ,
   CONSTRAINT `fk_results_jobs1`
     FOREIGN KEY (`jobs_id` )
-    REFERENCES `AUTOMATIONTEST`.`jobs` (`id` )
+    REFERENCES `jobs` (`id` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

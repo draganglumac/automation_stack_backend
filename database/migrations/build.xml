@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="dbdeploy_example" default="default">
-
-    <property name="db.driver" value="com.mysql.jdbc.Driver" /> 
-    <property name="db.host" value="10.65.80.46" />
-    <property name="db.name" value="AUTOMATIONTEST" />
+                                                               
+    <property environment="env"/>
+    <property name="db.driver" value="com.mysql.jdbc.Driver" />
+    <property name="db.host" value="${env.HOST}" />
+    <property name="db.name" value="${env.DATABASE}" />
+    <property name="db.username" value="${env.USERNAME}" />
+    <property name="db.passord" value="${env.PASSWORD}" />
     <property name="db.url" value="jdbc:mysql://${db.host}/${db.name}" />
 
     <path id="mysql.classpath">
@@ -32,7 +35,7 @@
 
     <target name="create-changelog-table">
         <sql driver="${db.driver}" url="${db.url}"
-             userid="dummy" password="dummy" classpathref="mysql.classpath" >
+             userid="${env.USERNAME}" password="${env.PASSWORD}" classpathref="mysql.classpath" >
             <fileset file="../dbdeploy/scripts/createSchemaVersionTable.mysql.sql"/>
         </sql>
     </target>                      
@@ -45,8 +48,8 @@
          work the same as in the ant sql task, see http://ant.apache.org/manual/CoreTasks/sql.html
         -->
         <dbdeploy driver="${db.driver}" url="${db.url}"
-                  userid="dummy"
-                  password="dummy"
+                  userid="${env.USERNAME}"
+                  password="${env.PASSWORD}"
                   dir="."
                 />
 
@@ -56,8 +59,8 @@
 
         <!-- use dbdeploy to generate the change script -->
         <dbdeploy driver="${db.driver}" url="${db.url}"
-                  userid="dummy"
-                  password="dummy"
+                  userid="${env.USERNAME}"
+                  password="${env.PASSWORD}"
                   dir="."
                   outputfile="output.sql"
                   undoOutputfile="undo.sql"
