@@ -39,8 +39,8 @@ class Seed
 end  
            
 if __FILE__ == $0
-  
-  DB = Sequel.mysql2(ENV["DATABASE"],:host =>ENV["HOST"],:username => ENV["USERNAME"],:password =>ENV["PASSWORD"])
+    
+  DB = Sequel.mysql2(ENV["AUTOMATION_STACK_DATABASE"],:host =>ENV["AUTOMATION_STACK_DATABASE_HOST"],:username => ENV["AUTOMATION_STACK_DATABASE_USERNAME"],:password =>ENV["AUTOMATION_STACK_DATABASE_PASSWORD"])
   
   Seed.run
   

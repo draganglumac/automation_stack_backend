@@ -4,10 +4,10 @@
                                                                
     <property environment="env"/>
     <property name="db.driver" value="com.mysql.jdbc.Driver" />
-    <property name="db.host" value="${env.HOST}" />
-    <property name="db.name" value="${env.DATABASE}" />
-    <property name="db.username" value="${env.USERNAME}" />
-    <property name="db.passord" value="${env.PASSWORD}" />
+    <property name="db.host" value="${env.AUTOMATION_STACK_DATABASE_HOST}" />
+    <property name="db.name" value="${env.AUTOMATION_STACK_DATABASE}" />
+    <property name="db.username" value="${env.AUTOMATION_STACK_DATABASE_USERNAME}" />
+    <property name="db.password" value="${env.AUTOMATION_STACK_DATABASE_PASSWORD}" />
     <property name="db.url" value="jdbc:mysql://${db.host}/${db.name}" />
 
     <path id="mysql.classpath">
@@ -35,7 +35,7 @@
 
     <target name="create-changelog-table">
         <sql driver="${db.driver}" url="${db.url}"
-             userid="${env.USERNAME}" password="${env.PASSWORD}" classpathref="mysql.classpath" >
+             userid="${db.username}" password="${db.password}" classpathref="mysql.classpath" >
             <fileset file="../dbdeploy/scripts/createSchemaVersionTable.mysql.sql"/>
         </sql>
     </target>                      
@@ -48,8 +48,8 @@
          work the same as in the ant sql task, see http://ant.apache.org/manual/CoreTasks/sql.html
         -->
         <dbdeploy driver="${db.driver}" url="${db.url}"
-                  userid="${env.USERNAME}"
-                  password="${env.PASSWORD}"
+                  userid="${db.username}"
+                  password="${db.password}"
                   dir="."
                 />
 
@@ -59,8 +59,8 @@
 
         <!-- use dbdeploy to generate the change script -->
         <dbdeploy driver="${db.driver}" url="${db.url}"
-                  userid="${env.USERNAME}"
-                  password="${env.PASSWORD}"
+                  userid="${db.use}"
+                  password="${db.password}"
                   dir="."
                   outputfile="output.sql"
                   undoOutputfile="undo.sql"
