@@ -2,7 +2,7 @@ require 'rubygems'
 require "pry"
 require "sequel" 
          
-DB = Sequel.mysql2("AUTOMATION",:host => "10.65.80.46",:username => "dummy",:password => "dummy")
+DB = Sequel.mysql2("AUTOMATIONs",:host => "10.65.80.46",:username => "dummy",:password => "dummy")
  
 class Seed
   

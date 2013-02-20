@@ -38,7 +38,7 @@ context "Database" do
     end  
     
     context "add_machine" do
-      #asserts("ok") { dc.query("Call add_machine(#{ds[:jobs].first[:id]},'<html></html>')").nil? }
+      asserts("ok") { dc.query("Call add_machine(#{ds[:jobs].first[:id]},'<html></html>')").nil? }
     end
     
     context "get_platform_id_by_name" do
