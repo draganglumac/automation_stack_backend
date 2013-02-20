@@ -78,7 +78,7 @@ namespace :db do
   
   desc "setup"
   task :setup do
-    ENV["AUTOMATION_STACK_DATABASE"] = "AUTOMATIONLIVE"
+    ENV["AUTOMATION_STACK_DATABASE"] = "AUTOMATION"
     Rake::Task['setup'].execute
     puts "setup and seeded #{ENV["AUTOMATION_STACK_DATABASE"]} database"
   end
