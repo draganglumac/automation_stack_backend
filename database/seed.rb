@@ -1,21 +1,11 @@
 require 'rubygems'
 require "pry"
 require "sequel" 
-         
-DB = Sequel.mysql2("AUTOMATIONs",:host => "10.65.80.46",:username => "dummy",:password => "dummy")
- 
+
 class Seed
   
-  def self.clear
-    DB[:results].truncate 
-    DB[:connected_devices].truncate
-    DB[:machines].truncate
-    DB[:jobs].truncate       
-    DB[:platform].truncate
-  end
   def self.run
-    
-                        
+              
     # =============
     # = platforms =
     # =============
@@ -49,7 +39,10 @@ class Seed
 end  
            
 if __FILE__ == $0
-  Seed.run  
+  
+  DB = Sequel.mysql2(ENV["DATABASE"],:host =>ENV["HOST"],:username => ENV["USERNAME"],:password =>ENV["PASSWORD"])
+  
+  Seed.run
   
   puts "seed ok!"
 end
