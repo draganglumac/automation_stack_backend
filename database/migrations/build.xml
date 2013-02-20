@@ -26,15 +26,15 @@
 
     <target name="default" depends="clean, update-database"/>
 
-    <target name="clean" depends="drop-and-create-database, create-changelog-table"/>
+    <target name="clean" depends="create-changelog-table"/>
 
     <target name="create-changelog-table">
         <sql driver="${db.driver}" url="${db.url}"
              userid="dummy" password="dummy" classpathref="mysql.classpath" >
             <fileset file="../dbdeploy/scripts/createSchemaVersionTable.mysql.sql"/>
         </sql>
-    </target>
-
+    </target>                      
+    
     <target name="update-database" description="generate a sql upgrade script">
 
         <!-- if you don't specify an output file, dbdeploy will apply the changes for you
@@ -78,7 +78,7 @@
         </sql>
     </target>
 
-    <target name="drop-and-create-database">
+    <target name="  ">
         <delete dir="db"/>
         <mkdir dir="db"/>
     </target>

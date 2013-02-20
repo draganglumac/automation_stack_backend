@@ -1,6 +1,15 @@
 require 'rubygems'
 require 'rake'
-require 'rake/testtask'
+require 'rake/testtask' 
+require 'sequel'
+require_relative 'database/hook' 
+
+
+ENV["DATABASE"] = "AUTOMATION.TEST"
+ENV["HOST"] = "10.65.80.46"
+ENV["USERNAME"] = "dummy"
+ENV["PASSWORD"] = "dummy"
+
 
 desc "Run all our tests"
 task :test do
@@ -13,14 +22,18 @@ task :test do
 end
 
 
-namespace :DB do
+namespace :DB do 
   
   desc "init"
   task :init do
-    system("cd database/migrations/ && ant clean")
+    if DB[:changelog].exists
+      puts "database already initialised!"
+    else
+      system("cd database/migrations/ && ant clean") 
+    end                                                     
   end
   desc "migrate"
-  task :migrate do
+  task :migrate do    
     system("cd database/migrations/ && ./migrate")
   end
 end  
