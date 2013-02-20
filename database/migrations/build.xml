@@ -2,8 +2,10 @@
 
 <project name="dbdeploy_example" default="default">
 
-    <property name="db.driver" value="com.mysql.jdbc.Driver" />
-    <property name="db.url" value="jdbc:mysql://10.65.80.46/AUTOMATIONTEST" />
+    <property name="db.driver" value="com.mysql.jdbc.Driver" /> 
+    <property name="db.host" value="10.65.80.46" />
+    <property name="db.name" value="AUTOMATIONTEST" />
+    <property name="db.url" value="jdbc:mysql://${db.host}/${db.name}" />
 
     <path id="mysql.classpath">
         <fileset dir="../dbdeploy/lib">
