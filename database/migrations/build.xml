@@ -3,7 +3,7 @@
 <project name="dbdeploy_example" default="default">
 
     <property name="db.driver" value="com.mysql.jdbc.Driver" />
-    <property name="db.url" value="jdbc:mysql://10.65.80.46/AUTOMATION.TEST" />
+    <property name="db.url" value="jdbc:mysql://10.65.80.46/AUTOMATIONTEST" />
 
     <path id="mysql.classpath">
         <fileset dir="../dbdeploy/lib">
@@ -59,7 +59,7 @@
                   dir="."
                   outputfile="output.sql"
                   undoOutputfile="undo.sql"
-                  dbms="hsql"
+                  dbms="mysql"
                 />
 
         <!-- now apply the changescript to the database -->
@@ -77,10 +77,5 @@
             select * from test;
         </sql>
     </target>
-
-    <target name="  ">
-        <delete dir="db"/>
-        <mkdir dir="db"/>
-    </target>
-
+    
 </project>
