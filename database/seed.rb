@@ -23,7 +23,7 @@ class Seed
     # ============
     # = machines =
     # ============
-    machines_id = DB[:machines].insert :call_sign => "maverick",:ip_address => "127.0.0.1",:platform_id => ios_id
+    machines_id = DB[:machines].insert :call_sign => "goose",:ip_address => "127.0.0.1",:platform_id => ios_id
 
     # =====================
     # = Connected Devices =
