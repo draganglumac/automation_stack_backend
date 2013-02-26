@@ -15,17 +15,24 @@ function print_usage()
 {
 	echo "Please enter hostname for sql db"
 	read host
+	echo "Please enter hostname for sql db"
+	read dbname
 	echo "Please enter username for sql db"
 	read user
-	echo "Please enter password for sql sb"
+	echo "Please enter password for sql db"
 	read pass
 }
 
 check_sql
 
-print_usage
+print_usage                       
 
-mysql -h$host -u$user -p$pass < build_db.sql
+export AUTOMATIONSTACK_HOST=$host
+export AUTOMATIONSTACK_DATABASE=$dbname
+export AUTOMATIONSTACK_USER=$user
+export AUTOMATIONSTACK_PASSWORD=$pass
+
+
 
 
 if [ $? -ne 0 ]; then
