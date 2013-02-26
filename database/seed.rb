@@ -23,7 +23,7 @@ class Seed
     # ============
     # = machines =
     # ============
-    machines_id = DB[:machines].insert :call_sign => "goose",:ip_address => "127.0.0.1",:platform_id => ios_id
+    machines_id = DB[:machines].insert :call_sign => "goose",:ip_address => "127.0.0.1",:platform_id => ios_id,:port => "9099"
 
     # =====================
     # = Connected Devices =
@@ -34,7 +34,7 @@ class Seed
     # ========
     # = Jobs =
     # ========
-    DB[:jobs].insert :name => "job_name",:machines_id => machines_id,:command => "echo hello",:status => "INCOMPLETE"
+    DB[:jobs].insert :name => "job_name",:machines_id => machines_id,:command => "echo hello",:status => "INCOMPLETE",:trigger_time => "1000-01-01 00:00:00"
   end
 end  
            
