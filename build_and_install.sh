@@ -15,7 +15,7 @@ function print_usage()
 {
 	echo "Please enter hostname for sql db"
 	read host
-	echo "Please enter hostname for sql db"
+	echo "Please enter database for sql db"
 	read dbname
 	echo "Please enter username for sql db"
 	read user
@@ -26,6 +26,8 @@ function print_usage()
 check_sql
 
 print_usage                       
+
+rake db:setup
 
 export AUTOMATIONSTACK_HOST=$host
 export AUTOMATIONSTACK_DATABASE=$dbname
