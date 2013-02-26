@@ -1,7 +1,7 @@
 ALTER Table `jobs`
-ADD trigger_time DATETIME
+ADD trigger_time INTEGER UNSIGNED
 
 --//@UNDO
 
 ALTER TABLE `jobs`
-DROP trigger_time DATETIME
+DROP trigger_time INTEGER UNSIGNED
