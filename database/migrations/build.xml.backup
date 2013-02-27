@@ -1,13 +1,14 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="dbdeploy_example" default="default">
                                                                
     <property environment="env"/>
     <property name="db.driver" value="com.mysql.jdbc.Driver" />
-    <property name="db.host" value="10.65.80.46" />
-    <property name="db.name" value="AUTOMATION" />
-    <property name="db.username" value="dummy" />
-    <property name="db.password" value="dummy" />
+    <property name="db.host" value="HOSTNAME" />
+    <property name="db.name" value="DATABASE" />
+    <property name="db.username" value="USERNAME" />
+    <property name="db.password" value="PASSWORD" />
     <property name="db.url" value="jdbc:mysql://${db.host}/${db.name}" />
 
     <path id="mysql.classpath">
@@ -59,7 +60,7 @@
 
         <!-- use dbdeploy to generate the change script -->
         <dbdeploy driver="${db.driver}" url="${db.url}"
-                  userid="${db.username}"
+                  userid="${db.use}"
                   password="${db.password}"
                   dir="."
                   outputfile="output.sql"

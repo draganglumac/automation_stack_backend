@@ -2,45 +2,58 @@
 
 function check_sql()
 {
-	version_message=`mysql --version`
-	if [ $? -ne 0 ]; then
-		echo "You need to have mysql installed on your machine."
-		echo ""
-		echo "Please install mysql and try again."
-		
-		exit -1
-	fi
+    version_message=`mysql --version`
+    if [ $? -ne 0 ]; then
+        echo "You need to have mysql installed on your machine."
+        echo ""
+        echo "Please install mysql and try again."
+
+        exit -1
+    fi
 }
-function print_usage()
+function update_build_xml()
 {
-	echo "Please enter hostname for sql db"
-	read host
-	echo "Please enter database for sql db"
-	read dbname
-	echo "Please enter username for sql db"
-	read user
-	echo "Please enter password for sql db"
-	read pass
+    host=$1
+    dbname=$2
+    user=$3
+    pass=$4
+
+   pushd "database/migrations"
+
+   cat build.xml | sed "s/HOSTNAME/$host/g" | sed "s/DATABASE/$dbname/g" | sed "s/USERNAME/$user/g" | sed "s/PASSWORD/$pass/g" > temp.txt
+   if [ ! -e build.xml.backup ]; then
+   mv build.xml build.xml.backup
+   fi
+   mv temp.txt build.xml
+   popd
+   echo "Updated build xml"
 }
 
 check_sql
 
-print_usage                       
+echo "Please enter hostname for sql db"
+read host
+echo "Please enter database for sql db"
+read dbname
+echo "Please enter username for sql db"
+read user
+echo "Please enter password for sql db"
+read pass
 
-rake db:setup
-
-export AUTOMATIONSTACK_HOST=$host
-export AUTOMATIONSTACK_DATABASE=$dbname
-export AUTOMATIONSTACK_USER=$user
-export AUTOMATIONSTACK_PASSWORD=$pass
+echo "AUTOMATION_HOST: $host" > settings.yaml
+echo "AUTOMATION_DB: $dbname" >> settings.yaml
+echo "AUTOMATION_USER: $user" >> settings.yaml
+echo "AUTOMATION_PASS: $pass" >> settings.yaml
 
 
+update_build_xml $host $dbname $user $pass
 
+rake 
 
 if [ $? -ne 0 ]; then
 
-	echo "Error completing sql data population"
-	exit 1
+    echo "Error completing sql data population"
+    exit 1
 fi
 
 echo "Done!"
