@@ -4,7 +4,7 @@ require 'mysql2'
 require 'rake/testtask' 
 require 'sequel'
 require 'yaml'
-
+require_relative 'seed.rb'
 db_config = YAML.load_file("settings.yaml")
 puts db_config["AUTOMATION_HOST"]
 puts db_config["AUTOMATION_DB"]
@@ -23,6 +23,10 @@ task :migrate do
     Dir.chdir("database/migrations/") do
         system("ant create-changelog-table && ant update-database")
     end
+end
+desc 'Populate with seed data'
+task :populate do
+   Seed.run(db_config["AUTOMATION_DB"],db_config["AUTOMATION_HOST"],db_config["AUTOMATION_USER"],db_config["AUTOMATION_PASS"]) 
 end
 at_exit do
     client.close()
