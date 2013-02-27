@@ -34,7 +34,7 @@ class Seed
     # ========
     # = Jobs =
     # ========
-    DB[:jobs].insert :name => "job_name",:machines_id => machines_id,:command => "echo hello",:status => "INCOMPLETE",:trigger_time => "1361915688"
+    DB[:jobs].insert :name => "job_name",:machines_id => machines_id,:command => "echo hello",:status => "INCOMPLETE",:trigger_time => "1361950421"
   end
 end  
            
