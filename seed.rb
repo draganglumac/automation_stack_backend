@@ -29,7 +29,7 @@ class Seed
         # ============
         # = machines =
         # ============
-        machines_id = @DB[:machines].insert :call_sign => "goose",:ip_address => "127.0.0.1",:platform_id => ios_id,:port => "9099"
+        machines_id = @DB[:machines].insert :call_sign => "goose",:ip_address => "172.20.160.147",:platform_id => ios_id,:port => "9099"
 
         # =====================
         # = Connected Devices =
@@ -40,7 +40,10 @@ class Seed
         # ========
         # = Jobs =
         # ========
-        @DB[:jobs].insert :name => "job_name",:machines_id => machines_id,:command => "echo hello",:status => "INCOMPLETE",:trigger_time => "1361950421"
+        time_near_future = Time.now.to_i + 180
+
+        @DB[:jobs].insert :name => "hudsoniPhoneExample",:machines_id => machines_id,:command => "mkdir -p hudsoniphoneexample; cd hudsoniphoneexample; pwd; git clone git@github.com:AlexsJones/Hudson-Integration.git .; cd ../; rm -rf hudsoniphoneexample;",:status => "INCOMPLETE",:trigger_time => time_near_future.to_s
+
         puts "Seed done"
     end
 end  
