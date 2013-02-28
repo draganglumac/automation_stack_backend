@@ -18,35 +18,44 @@ function update_build_xml()
     user=$3
     pass=$4
 
-   pushd "database/migrations"
+    pushd "database/migrations"
 
-   cat build.xml | sed "s/HOSTNAME/$host/g" | sed "s/DATABASE/$dbname/g" | sed "s/USERNAME/$user/g" | sed "s/PASSWORD/$pass/g" > temp.txt
-   if [ ! -e build.xml.backup ]; then
-   mv build.xml build.xml.backup
-   fi
-   mv temp.txt build.xml
-   popd
-   echo "Updated build xml"
+    cat build.xml | sed "s/HOSTNAME/$host/g" | sed "s/DATABASE/$dbname/g" | sed "s/USERNAME/$user/g" | sed "s/PASSWORD/$pass/g" > temp.txt
+    if [ ! -e build.xml.backup ]; then
+        mv build.xml build.xml.backup
+    fi
+    mv temp.txt build.xml
+    popd
+    echo "Updated build xml"
 }
 
 check_sql
 
-echo "Please enter hostname for sql db"
-read host
-echo "Please enter database for sql db"
-read dbname
-echo "Please enter username for sql db"
-read user
-echo "Please enter password for sql db"
-read pass
+if [ $1 ] && [ $2 ] && [ $3 ] && [ $4 ]; then 
+    echo "Using commandline args"
+    echo " HOST DB USER PASS "
+    echo "AUTOMATION_HOST: $1" > settings.yaml
+    echo "AUTOMATION_DB: $2" >> settings.yaml
+    echo "AUTOMATION_USER: $3" >> settings.yaml
+    echo "AUTOMATION_PASS: $4" >> settings.yaml
+    update_build_xml $1 $2 $3 $4
+else
+    echo "Please enter hostname for sql db"
+    read host
+    echo "Please enter database for sql db"
+    read dbname
+    echo "Please enter username for sql db"
+    read user
+    echo "Please enter password for sql db"
+    read pass
 
-echo "AUTOMATION_HOST: $host" > settings.yaml
-echo "AUTOMATION_DB: $dbname" >> settings.yaml
-echo "AUTOMATION_USER: $user" >> settings.yaml
-echo "AUTOMATION_PASS: $pass" >> settings.yaml
+    echo "AUTOMATION_HOST: $host" > settings.yaml
+    echo "AUTOMATION_DB: $dbname" >> settings.yaml
+    echo "AUTOMATION_USER: $user" >> settings.yaml
+    echo "AUTOMATION_PASS: $pass" >> settings.yaml
+    update_build_xml $host $dbname $user $pass
+fi
 
-
-update_build_xml $host $dbname $user $pass
 
 rake 
 
