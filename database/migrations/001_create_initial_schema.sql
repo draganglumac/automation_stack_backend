@@ -73,18 +73,18 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `connected_devices` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `machines_id` INT(11) NOT NULL ,
-  `devices_id` INT(11) NOT NULL ,
+  `machine_id` INT(11) NOT NULL ,
+  `device_id` INT(11) NOT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `fk_connected_devices_machines1_idx` (`machines_id` ASC) ,
-  INDEX `fk_connected_devices_devices1_idx` (`devices_id` ASC) ,
+  INDEX `fk_connected_devices_machines1_idx` (`machine_id` ASC) ,
+  INDEX `fk_connected_devices_devices1_idx` (`device_id` ASC) ,
   CONSTRAINT `fk_connected_devices_machines1`
-    FOREIGN KEY (`machines_id` )
+    FOREIGN KEY (`machine_id` )
     REFERENCES `machines` (`id` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_connected_devices_devices1`
-    FOREIGN KEY (`devices_id` )
+    FOREIGN KEY (`device_id` )
     REFERENCES `devices` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -102,11 +102,11 @@ CREATE  TABLE IF NOT EXISTS `jobs` (
   `TIMESTAMP` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
   `command` MEDIUMTEXT NULL DEFAULT NULL ,
   `status` VARCHAR(45) NULL DEFAULT 'INCOMPLETE' ,
-  `machines_id` INT(11) NOT NULL ,
+  `machine_id` INT(11) NOT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `fk_jobs_machines1_idx` (`machines_id` ASC) ,
+  INDEX `fk_jobs_machines1_idx` (`machine_id` ASC) ,
   CONSTRAINT `fk_jobs_machines1`
-    FOREIGN KEY (`machines_id` )
+    FOREIGN KEY (`machine_id` )
     REFERENCES `machines` (`id` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION)

@@ -29,20 +29,20 @@ class Seed
         # ============
         # = machines =
         # ============
-        machines_id = @DB[:machines].insert :call_sign => "goose",:ip_address => "172.20.160.147",:platform_id => ios_id,:port => "9099"
+        machine_id = @DB[:machines].insert :call_sign => "goose",:ip_address => "172.20.160.147",:platform_id => ios_id,:port => "9099"
 
         # =====================
         # = Connected Devices =
         # =====================
-        @DB[:connected_devices].insert :machines_id => machines_id,:devices_id => iphone_id
-        @DB[:connected_devices].insert :machines_id => machines_id,:devices_id => tablet_id
+        @DB[:connected_devices].insert :machine_id => machine_id,:device_id => iphone_id
+        @DB[:connected_devices].insert :machine_id => machine_id,:device_id => tablet_id
 
         # ========
         # = Jobs =
         # ========
         time_near_future = Time.now.to_i + 180
 
-        @DB[:jobs].insert :name => "hudsoniPhoneExample",:machines_id => machines_id,:command => "mkdir -p hudsoniphoneexample; cd hudsoniphoneexample; pwd; git clone git@github.com:AlexsJones/Hudson-Integration.git .; cd ../; rm -rf hudsoniphoneexample;",:status => "INCOMPLETE",:trigger_time => time_near_future.to_s
+        @DB[:jobs].insert :name => "hudsoniPhoneExample",:machine_id => machine_id,:command => "mkdir -p hudsoniphoneexample; cd hudsoniphoneexample; pwd; git clone git@github.com:AlexsJones/Hudson-Integration.git .; cd ../; rm -rf hudsoniphoneexample;",:status => "INCOMPLETE",:trigger_time => time_near_future.to_s
 
         puts "Seed done"
     end
