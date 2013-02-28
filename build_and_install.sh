@@ -20,11 +20,7 @@ function update_build_xml()
 
     pushd "database/migrations"
 
-    cat build.xml | sed "s/HOSTNAME/$host/g" | sed "s/DATABASE/$dbname/g" | sed "s/USERNAME/$user/g" | sed "s/PASSWORD/$pass/g" > temp.txt
-    if [ ! -e build.xml.backup ]; then
-        mv build.xml build.xml.backup
-    fi
-    mv temp.txt build.xml
+    cat build.xml.preset | sed "s/HOSTNAME/$host/g" | sed "s/DATABASE/$dbname/g" | sed "s/USERNAME/$user/g" | sed "s/PASSWORD/$pass/g" > build.xml
     popd
     echo "Updated build xml"
 }

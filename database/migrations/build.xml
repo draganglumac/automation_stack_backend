@@ -5,7 +5,7 @@
     <property environment="env"/>
     <property name="db.driver" value="com.mysql.jdbc.Driver" />
     <property name="db.host" value="10.65.80.46" />
-    <property name="db.name" value="AUTOMATION" />
+    <property name="db.name" value="AUTOMATIONTEST" />
     <property name="db.username" value="dummy" />
     <property name="db.password" value="dummy" />
     <property name="db.url" value="jdbc:mysql://${db.host}/${db.name}" />
@@ -59,7 +59,7 @@
 
         <!-- use dbdeploy to generate the change script -->
         <dbdeploy driver="${db.driver}" url="${db.url}"
-                  userid="${db.username}"
+                  userid="${db.use}"
                   password="${db.password}"
                   dir="."
                   outputfile="output.sql"
