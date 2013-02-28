@@ -16,8 +16,8 @@ class Seed
         # = platforms =
         # =============
 
-        ios_id= @DB[:platform].insert :name => "ios"
-        @DB[:platform].insert :name => "android"
+        ios_id= @DB[:platforms].insert :name => "ios"
+        @DB[:platforms].insert :name => "android"
 
 
         # ===========
