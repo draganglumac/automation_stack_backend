@@ -20,11 +20,19 @@ class Seed
         @DB[:platforms].insert :name => "android"
 
 
+        #device_types
+        phone = @DB[:device_types].insert :name => "phone"
+        tablet = @DB[:device_types].insert :name => "tablet"
+
+        #manufactures
+        apple = @DB[:manufacturers].insert :name => "apple"
+        samsung = @DB[:manufacturers].insert :name  => "samsung"
+
         # ===========
         # = Devices =
         # ===========
-        iphone_id = @DB[:devices].insert :model => "iphone4",:serial_number => "apple001",:platform_id => ios_id,:type_of_device => "phone" 
-        tablet_id = @DB[:devices].insert :model => "ipad",:serial_number => "apple002",:platform_id => ios_id ,:type_of_device => "tablet"   
+        iphone_id = @DB[:devices].insert :model => "iphone4",:serial_number => "apple001",:platform_id => ios_id,:device_type_id => phone,:manufacturer_id => apple
+        tablet_id = @DB[:devices].insert :model => "ipad",:serial_number => "apple002",:platform_id => ios_id ,:device_type_id => tablet,:manufacturer_id => apple 
 
         # ============
         # = machines =
