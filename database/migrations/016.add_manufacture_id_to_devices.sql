@@ -1,4 +1,4 @@
-ALTER TABLE `devices` ADD COLUMN `manufacturer_id` INT NOT NULL  AFTER `device_type_id` ;
+ALTER TABLE `devices` ADD COLUMN `manufacturer_id` INT NOT NULL ;
 
 --//@UNDO
 
