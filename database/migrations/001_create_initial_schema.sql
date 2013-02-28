@@ -17,7 +17,7 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 -- Table `platfoms`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `platfoms` (
+CREATE  TABLE IF NOT EXISTS `platforms` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) )
@@ -38,7 +38,7 @@ CREATE  TABLE IF NOT EXISTS `machines` (
   INDEX `fk_machines_platform1_idx` (`platform_id` ASC) ,
   CONSTRAINT `fk_machines_platform1`
     FOREIGN KEY (`platform_id` )
-    REFERENCES `platfoms` (`id` )
+    REFERENCES `platforms` (`id` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -60,7 +60,7 @@ CREATE  TABLE IF NOT EXISTS `devices` (
   INDEX `fk_devices_platform1_idx` (`platform_id` ASC) ,
   CONSTRAINT `fk_devices_platform1`
     FOREIGN KEY (`platform_id` )
-    REFERENCES `platfoms` (`id` )
+    REFERENCES `platforms` (`id` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -145,7 +145,7 @@ DROP TABLE `connected_devices`;
 DROP TABLE `devices`;
 DROP TABLE `jobs`;
 DROP TABLE `machines`;
-DROP TABLE `platfoms`;
+DROP TABLE `platforms`;
 
 
 
