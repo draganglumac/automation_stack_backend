@@ -18,12 +18,25 @@ end
 task :create do
     client.query("CREATE DATABASE #{db_config['AUTOMATION_DB']};")
 end
+
+
+desc 'Migrate the database'
 task :migrate do
+    puts "Migrating"
+    Dir.chdir("database/migrations/") do
+        system("ant update-database")
+    end
+end
+
+desc 'setup the database'
+task :setup do
     puts "Migrating"
     Dir.chdir("database/migrations/") do
         system("ant create-changelog-table && ant update-database")
     end
 end
+
+
 desc 'Populate with seed data'
 task :populate do
    Seed.run(db_config["AUTOMATION_DB"],db_config["AUTOMATION_HOST"],db_config["AUTOMATION_USER"],db_config["AUTOMATION_PASS"]) 
@@ -32,4 +45,4 @@ at_exit do
     client.close()
 end
 
-task :default => [:drop,:create, :migrate]
+task :default => [:drop,:create, :setup]
