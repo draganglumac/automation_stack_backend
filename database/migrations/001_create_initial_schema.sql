@@ -53,6 +53,7 @@ CREATE  TABLE IF NOT EXISTS `devices` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `model` VARCHAR(45) NULL DEFAULT NULL ,
   `serial_number` VARCHAR(45) NULL DEFAULT NULL ,
+  `type_of_device` VARCHAR(45) NULL ,
   `platform_id` INT(11) NOT NULL ,
   PRIMARY KEY (`id`, `platform_id`) ,
   INDEX `fk_devices_platform1_idx` (`platform_id` ASC) ,
