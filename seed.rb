@@ -31,8 +31,8 @@ class Seed
         # ===========
         # = Devices =
         # ===========
-        iphone_id = @DB[:devices].insert :name  => "iphone4",:serial_number => "apple001",:platform_id => ios_id,:device_type_id => phone,:manufacturer_id => apple
-        tablet_id = @DB[:devices].insert :name  => "ipad",:serial_number => "apple002",:platform_id => ios_id ,:device_type_id => tablet,:manufacturer_id => apple 
+        iphone_id = @DB[:devices].insert :name  => "iphone4",:tag => "a001",  :serial_number => "apple001",:platform_id => ios_id,:device_type_id => phone,:manufacturer_id => apple
+        tablet_id = @DB[:devices].insert :name  => "ipad",:tag => "a002", :serial_number => "apple002",:platform_id => ios_id ,:device_type_id => tablet,:manufacturer_id => apple 
 
         # ============
         # = machines =
