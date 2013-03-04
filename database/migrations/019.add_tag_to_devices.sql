@@ -1,0 +1,3 @@
+ALTER TABLE `devices` ADD COLUMN `tag` VARCHAR(45) NULL  AFTER `id` , ADD UNIQUE INDEX `tag_UNIQUE` (`tag` ASC);
+--//@UNDO
+ALTER TABLE `devices` DROP COLUMN `tag` , DROP INDEX `tag_UNIQUE`;
