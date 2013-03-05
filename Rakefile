@@ -20,6 +20,18 @@ task :create do
 end
 
 
+
+
+namespace :test do
+    desc "run"
+    task :run do
+        system "cd tests && ruby unit.rb"
+    end
+end
+desc "reset"
+task :reset => [:drop,:create,:setup,:populate] do
+end
+
 desc 'Migrate the database'
 task :migrate do
     puts "Migrating"
