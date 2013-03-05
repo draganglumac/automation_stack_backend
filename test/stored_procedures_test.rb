@@ -9,17 +9,17 @@ require "mysql2"
 require_relative "../seed.rb"
 
 context "Database" do
-  helper(:config){YAML.load_file("../settings.yaml")}            
+  
+  helper(:config){YAML.load_file("settings.yaml")}            
   helper(:ds){Sequel.mysql2(config["AUTOMATION_DB"],:host => config["AUTOMATION_HOST"],:username => config["AUTOMATION_USER"],:password => config["AUTOMATION_PASS"])}
   helper(:dc) { Mysql2::Client.new(:host => config["AUTOMATION_HOST"], :username => config["AUTOMATION_PASS"], :password => config["AUTOMATION_USER"], :database => config["AUTOMATION_DB"], :async => true,:flags => Mysql2::Client::MULTI_STATEMENTS ) }
   
   hookup do
-    `cd ../ && rake reset`
+    `rake reset`
   end
   
   context "Stored Procedures" do 
-    
-    
+
     context "get_incomplete_jobs" do
       asserts("ok") {dc.query( 'CALL get_incomplete_jobs()').count==1}
     end                      

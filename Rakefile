@@ -1,9 +1,16 @@
 require 'rubygems'
-require 'rake'   
-require 'mysql2'
-require 'rake/testtask' 
+
+require 'mysql2' 
 require 'sequel'
+
 require 'yaml'
+
+
+
+require 'rake'
+require 'rake/testtask'
+
+
 require_relative 'seed.rb'
 db_config = YAML.load_file("settings.yaml")
 puts db_config["AUTOMATION_HOST"]
@@ -12,6 +19,7 @@ puts db_config["AUTOMATION_USER"]
 puts db_config["AUTOATION_PASS"]
 
 client = Mysql2::Client.new(:host => db_config["AUTOMATION_HOST"],:username => db_config["AUTOMATION_USER"],:password => db_config["AUTOMATION_PASS"])
+
 task :drop do
     client.query("DROP DATABASE IF EXISTS #{db_config['AUTOMATION_DB']};")
 end
@@ -20,14 +28,14 @@ task :create do
 end
 
 
-
-
-namespace :test do
-    desc "run"
-    task :run do
-        system "cd tests && ruby unit.rb"
-    end
+Rake::TestTask.new(:verify) do |t|
+    
+    t.test_files = FileList['test/*.rb']
+    t.verbose = true
 end
+
+
+
 desc "reset"
 task :reset => [:drop,:create,:setup,:populate] do
 end
