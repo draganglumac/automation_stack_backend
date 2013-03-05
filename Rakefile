@@ -29,8 +29,7 @@ end
 
 
 Rake::TestTask.new(:verify) do |t|
-    
-    t.test_files = FileList['test/*.rb']
+    t.test_files = FileList['test/*_test.rb']
     t.verbose = true
 end
 
