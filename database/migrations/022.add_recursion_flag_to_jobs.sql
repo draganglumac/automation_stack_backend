@@ -1,0 +1,5 @@
+ALTER TABLE `jobs` ADD COLUMN `recursion` INT NOT NULL DEFAULT 0;
+
+--//@UNDO
+
+ALTER TABLE `jobs` DROP COLUMN `recursion`;
