@@ -4,6 +4,7 @@ source "http://rubygems.org"
 # gem "rails"
 gem "mysql2", "~> 0.3.11"
 gem "sequel", "~> 3.44.0"
+gem "rake"
 
 
 group :development do

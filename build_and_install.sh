@@ -53,12 +53,14 @@ else
 fi
 
 
-rake 
+rake verify 
 
 if [ $? -ne 0 ]; then
 
     echo "Error completing sql data population"
     exit 1
 fi
+
+rake
 
 echo "Done!"

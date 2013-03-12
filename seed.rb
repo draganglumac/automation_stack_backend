@@ -4,7 +4,7 @@ require "sequel"
 require 'yaml'
 
 
-db_config = YAML.load_file("settings.yaml")
+
 
 class Seed
 
