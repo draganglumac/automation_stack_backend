@@ -32,8 +32,8 @@ context "Database" do
     
     context "set_job_status_from_id" do
       asserts("ok") do
-        dc.query("CALL set_job_status_from_id('INPROGRESS',1)")
-        ds[:jobs].where(:status => "INPROGRESS").count==0
+        dc.query("CALL set_job_status_from_id(1,'INPROGRESS')")
+        ds[:jobs].where(:status => "INPROGRESS").count==1
       end
 
     end 
