@@ -52,6 +52,7 @@ else
     update_build_xml $host $dbname $user $pass
 fi
 
+bundle install
 
 rake verify 
 

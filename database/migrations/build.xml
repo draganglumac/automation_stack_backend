@@ -4,7 +4,7 @@
                                                                
     <property environment="env"/>
     <property name="db.driver" value="com.mysql.jdbc.Driver" />
-    <property name="db.host" value="localhost" />
+    <property name="db.host" value="127.0.0.1" />
     <property name="db.name" value="AUTOMATION" />
     <property name="db.username" value="dummy" />
     <property name="db.password" value="dummy" />
