@@ -53,7 +53,9 @@ class Seed
 
         @DB[:jobs].insert :name => "hudsoniPhoneExample",:machine_id => machine_id,:command => "mkdir -p hudsoniphoneexample; cd hudsoniphoneexample; pwd; git clone git@github.com:AlexsJones/Hudson-Integration.git .; cd ../; rm -rf hudsoniphoneexample;",:status => "INCOMPLETE",:trigger_time => time_near_future.to_s, :recursion => 0
         puts "Seed done"
-    end
+
+
+	end
 end  
 
 

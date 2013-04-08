@@ -30,7 +30,7 @@ check_sql
 if [ $1 ] && [ $2 ] && [ $3 ] && [ $4 ]; then 
     echo "Using commandline args"
     echo " HOST DB USER PASS "
-    echo "AUTOMATION_HOST: $1" > settings.yaml
+    echo "AUTOMATION_HOST: $1" >> settings.yaml
     echo "AUTOMATION_DB: $2" >> settings.yaml
     echo "AUTOMATION_USER: $3" >> settings.yaml
     echo "AUTOMATION_PASS: $4" >> settings.yaml
