@@ -41,14 +41,6 @@ context "Database" do
     context "get_all_jobs" do
       asserts("ok") {dc.query("Call get_jobs_all()").count > 0}
     end
-    
-    context "add_result_from_job" do
-      asserts("ok") do 
-        dc.query("Call add_result_from_job(#{ds[:jobs].first[:id]},'<html></html>')").nil? 
-        ds[:results].count ==1
-      end
-    end  
-    
   end
 end   
 
