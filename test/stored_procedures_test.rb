@@ -20,10 +20,6 @@ context "Database" do
   
   context "Stored Procedures" do 
 
-    context "get_incomplete_jobs" do
-      asserts("ok") {dc.query( 'CALL get_incomplete_jobs()').count==1}
-    end                      
-    
     context "get_machine_ip_from_id" do
       asserts("ok") do
         dc.query( "CALL get_machine_ip_from_id(1)").first["ip_address"]  == "172.20.160.147"
