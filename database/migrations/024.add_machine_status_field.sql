@@ -1,0 +1,7 @@
+ALTER TABLE `machines`
+ADD status VARCHAR(45) NOT NULL DEFAULT "OFFLINE";
+
+--//@UNDO
+
+ALTER TABLE `machines`
+DROP COLUMN status VARCHAR(45)
