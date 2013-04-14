@@ -17,6 +17,7 @@ puts db_config["AUTOMATION_HOST"]
 puts db_config["AUTOMATION_DB"]
 puts db_config["AUTOMATION_USER"]
 puts db_config["AUTOATION_PASS"]
+puts db_config["SEED_CONFIG"]
 
 client = Mysql2::Client.new(:host => db_config["AUTOMATION_HOST"],:username => db_config["AUTOMATION_USER"],:password => db_config["AUTOMATION_PASS"])
 
