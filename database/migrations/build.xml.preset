@@ -8,6 +8,7 @@
     <property name="db.name" value="DATABASE" />
     <property name="db.username" value="USERNAME" />
     <property name="db.password" value="PASSWORD" />
+    <property name="db.seedconf" value="SEED_CONFIG" />
     <property name="db.url" value="jdbc:mysql://${db.host}/${db.name}" />
 
     <path id="mysql.classpath">
