@@ -17,7 +17,6 @@ context "Database" do
   hookup do
     `rake reset`
   end
-  
   context "Stored Procedures" do 
 
     context "get_machine_ip_from_id" do
@@ -25,17 +24,21 @@ context "Database" do
         dc.query( "CALL get_machine_ip_from_id(1)").first["ip_address"]  == "172.20.160.147"
       end
     end                                            
-    
     context "set_job_status_from_id" do
       asserts("ok") do
         dc.query("CALL set_job_status_from_id(1,'INPROGRESS')")
         ds[:jobs].where(:status => "INPROGRESS").count==1
       end
 
-    end 
-    
-    context "get_all_jobs" do
-      asserts("ok") {dc.query("Call get_jobs_all()").count > 0}
+    end	
+    context "update_machine_status" do
+		asserts("ok") do
+		dc.query("CALL update_machine_status(1,'ONLINE')")
+		ds[:machines].where(:status => 'ONLINE').count==1
+		end
+	end
+	context "get_candidate_jobs" do
+      asserts("ok") {dc.query("Call get_candidate_jobs()").count > 0}
     end
   end
 end   
