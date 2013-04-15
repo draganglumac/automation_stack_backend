@@ -6,7 +6,7 @@ require 'yaml'
 
 
 
-class Seed
+class TestSeed
 
     def self.run(db,host,username,password)
 

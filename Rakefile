@@ -6,17 +6,16 @@ require 'sequel'
 require 'yaml'
 
 
-
 require 'rake'
 require 'rake/testtask'
 
 
-require_relative 'seed.rb'
 db_config = YAML.load_file("settings.yaml")
 puts db_config["AUTOMATION_HOST"]
 puts db_config["AUTOMATION_DB"]
 puts db_config["AUTOMATION_USER"]
 puts db_config["AUTOATION_PASS"]
+puts db_config["SEED_CONFIG"]
 
 client = Mysql2::Client.new(:host => db_config["AUTOMATION_HOST"],:username => db_config["AUTOMATION_USER"],:password => db_config["AUTOMATION_PASS"])
 
@@ -36,7 +35,7 @@ end
 
 
 desc "reset"
-task :reset => [:drop,:create,:setup,:populate] do
+task :reset => [:drop,:create,:setup,:populate_test_data] do
 end
 
 desc 'Migrate the database'
@@ -56,12 +55,20 @@ task :setup do
 end
 
 
-desc 'Populate with seed data'
-task :populate do
-   Seed.run(db_config["AUTOMATION_DB"],db_config["AUTOMATION_HOST"],db_config["AUTOMATION_USER"],db_config["AUTOMATION_PASS"]) 
-end
-at_exit do
-    client.close()
+desc 'Populate with test data'
+task :populate_test_data do
+    require_relative 'test/test_data.rb'
+    TestSeed.run(db_config["AUTOMATION_DB"],db_config["AUTOMATION_HOST"],db_config["AUTOMATION_USER"],db_config["AUTOMATION_PASS"]) 
 end
 
-task :default => [:drop,:create, :setup]
+desc 'Seed the database'
+task :seed do
+    require_relative 'seed/seed'
+    Seed.run
+end
+
+at_exit do
+    client.close
+end
+
+task :default => [:drop,:create,:setup,:seed]

@@ -1,0 +1,8 @@
+# Format, the same as the machine table except
+# ids are generated on insertion
+#
+# Example data
+call_sign,ip_address,platform,port,status
+goose,172.20.160.147,ios,9099,OFFLINE
+maverick,127.0.0.1,ios,9099,OFFLINE
+
