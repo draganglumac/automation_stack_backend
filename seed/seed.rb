@@ -18,7 +18,7 @@ module Seed
 
         # First, hook up active record to the database
         db_conn = ActiveRecord::Base.establish_connection(
-            :adapter => 'mysql',
+            :adapter => 'mysql2',
             :host => processor.conf['AUTOMATION_HOST'],
             :database => processor.conf['AUTOMATION_DB'],
             :username => processor.conf['AUTOMATION_USER'],
