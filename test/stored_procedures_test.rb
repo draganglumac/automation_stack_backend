@@ -6,7 +6,7 @@ require 'pry'
 require "sequel"
 require "mysql2"
 
-require_relative "../seed.rb"
+require_relative "test_data.rb"
 
 context "Database" do
   
