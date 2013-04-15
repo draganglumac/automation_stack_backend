@@ -15,8 +15,44 @@ class CSVProcessor
         conf_filepath = File.join(@root_dir, 'settings.yaml') if conf_filepath.empty?       
 
         @conf = YAML::load_file(File.open(conf_filepath))
+        @platforms = []
+        @manufacturers = []
+        @device_types = []
         @machines = []
         @devices = []
+    end
+
+    def load_platforms(seed_dir="")
+        seed_conf = @conf['SEED_CONFIG']
+        return if seed_conf.empty?
+
+        seed_dir = File.join(@root_dir, 'database/seed') if seed_dir.empty?
+
+        File.open("#{seed_dir}/#{seed_conf}/platforms.csv").each do |line|
+            @platforms << CSV.parse(line).first unless line.strip.empty? or line.strip.start_with?("#")
+        end
+    end
+
+    def load_manufacturers(seed_dir="")
+        seed_conf = @conf['SEED_CONFIG']
+        return if seed_conf.empty?
+
+        seed_dir = File.join(@root_dir, 'database/seed') if seed_dir.empty?
+
+        File.open("#{seed_dir}/#{seed_conf}/manufacturers.csv").each do |line|
+            @manufacturers << CSV.parse(line).first unless line.strip.empty? or line.strip.start_with?("#")
+        end
+    end
+
+    def load_device_types(seed_dir="")
+        seed_conf = @conf['SEED_CONFIG']
+        return if seed_conf.empty?
+
+        seed_dir = File.join(@root_dir, 'database/seed') if seed_dir.empty?
+
+        File.open("#{seed_dir}/#{seed_conf}/device_types.csv").each do |line|
+            @device_types << CSV.parse(line).first unless line.strip.empty? or line.strip.start_with?("#")
+        end
     end
 
     def load_machines(seed_dir="")
@@ -41,6 +77,72 @@ class CSVProcessor
         end
     end
 
+    def seed_platforms
+        return if @platforms.empty? or not defined?(DOM)
+
+        keys = []
+        @platforms.first.each do |key|
+            keys << key.to_sym
+        end
+        @platforms[0] = keys
+
+        maps = []
+        @platforms.each do |m|
+            if m != @platforms.first then
+                maps << Hash[@platforms.first.zip m]
+            end
+        end
+
+        maps.each do |mp|
+            p = DOM::Platform.new(mp)
+            p.save
+        end
+    end
+
+    def seed_manufacturers
+        return if @manufacturers.empty? or not defined?(DOM)
+
+        keys = []
+        @manufacturers.first.each do |key|
+            keys << key.to_sym
+        end
+        @manufacturers[0] = keys
+
+        maps = []
+        @manufacturers.each do |m|
+            if m != @manufacturers.first then
+                maps << Hash[@manufacturers.first.zip m]
+            end
+        end
+
+        maps.each do |mmf|
+            mf = DOM::Manufacturer.new(mmf)
+            mf.save
+        end
+    end
+
+    def seed_device_types
+        return if @device_types.empty? or not defined?(DOM)
+
+        keys = []
+        @device_types.first.each do |key|
+            keys << key.to_sym
+        end
+        @device_types[0] = keys
+
+        maps = []
+        @device_types.each do |m|
+            if m != @device_types.first then
+                maps << Hash[@device_types.first.zip m]
+            end
+        end
+
+        maps.each do |mdt|
+            dt = DOM::DeviceType.new(mdt)
+            dt.save
+        end
+    end
+
     def seed_machines
 =begin
     This is a bit ugly :-(!
@@ -56,7 +158,7 @@ class CSVProcessor
 =end
 
         return if @machines.empty? or not defined?(DOM)
-       
+
         keys = [] 
         @machines.first.each do |key|
             keys << key.to_sym
