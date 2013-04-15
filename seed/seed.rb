@@ -5,6 +5,9 @@ module Seed
 
     def self.run
         processor = CSVProcessor.new
+        processor.load_platforms
+        processor.load_manufacturers
+        processor.load_device_types
         processor.load_machines
         processor.load_devices
 
@@ -28,7 +31,9 @@ module Seed
         # Then load the model so that it binds tables to the classes
         require_relative 'dom'
 
-        # Process machines
+        processor.seed_platforms
+        processor.seed_manufacturers
+        processor.seed_device_types
         processor.seed_machines
         processor.seed_devices
 
