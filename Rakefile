@@ -61,8 +61,12 @@ task :populate_test_data do
     TestSeed.run(db_config["AUTOMATION_DB"],db_config["AUTOMATION_HOST"],db_config["AUTOMATION_USER"],db_config["AUTOMATION_PASS"]) 
 end
 
+desc "seed"
+task :seed => [:drop,:create,:setup,:seed_db] do
+end
+
 desc 'Seed the database'
-task :seed do
+task :seed_db do
     require_relative 'seed/seed'
     Seed.run
 end
