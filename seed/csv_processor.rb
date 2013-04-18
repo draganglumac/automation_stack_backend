@@ -223,7 +223,7 @@ class CSVProcessor
             md.delete(:device_type)
 
             on_node = nil
-            if not md[:machine].empty? then
+            if not md[:machine].nil? and not md[:machine].empty? then
                 on_node = DOM::Machine.find_by_call_sign(md[:machine])
             end
             md.delete(:machine)
