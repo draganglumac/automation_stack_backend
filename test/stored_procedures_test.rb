@@ -33,7 +33,7 @@ context "Database" do
     end	
     context "update_machine_status" do
 		asserts("ok") do
-		dc.query("CALL update_machine_status(1,'ONLINE')")
+		dc.query("CALL update_machine_status('172.20.160.147','ONLINE')")
 		ds[:machines].where(:status => 'ONLINE').count==1
 		end
 	end
