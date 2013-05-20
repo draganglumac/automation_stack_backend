@@ -11,8 +11,8 @@ SE015,Xperia Z,CB5A1PE6E6,Android,Phone,Sony,,
 LG005,P880,015d256469101607,Android,Phone,LG,,
 LG006,Nexus 4,016f47f49387ae60,Android,Phone,LG,,
 AP123,iPhone 5,63d12fa6fd304e43da871016c29c458243e3dede,iOS,Phone,Apple,,
-AP125,iPhone 4,4da28e9b670cd5fdabd1718f90b0be06153f1cf0,iOS,Phone,Apple,,
-AP126,iPhone 4S,6e2ee09b797cd4ef22607fe8753c4477da50b659,iOS,Phone,Apple,,
+AP125,iPhone 4,4da28e9b670cd5fdabd1718f90b0be06153f1cf0,iOS,Phone,Apple,node005,10.65.82.73
+AP126,iPhone 4S,6e2ee09b797cd4ef22607fe8753c4477da50b659,iOS,Phone,Apple,node004,10.65.82.75
 AP127,iPhone 4S,37e6f5ec8140e93af69b6e9655c929e5d0b3db0d,iOS,Phone,Apple,,
 AP131,iPhone 4,59B66308216E8F76BAA78E39CC4E4D1DAB048F19,iOS,Phone,Apple,,
 AP132,iPhone 4S,60490fd177f54cc27f2b85dab9dd347ca2d0a4ca,iOS,Phone,Apple,,
@@ -26,3 +26,5 @@ MT007,Razr i,TA32402KGR,Android,Phone,Motorola,,
 BB006,Curve 9320,24BEFC92,Blackberry OS,Phone,Blackberry,,
 IPAD129,iPad 3G/Wifi (MD523B),ccd8232292df11a619801432fdd830062c84967e,iOS,Tablet,Apple,node003,10.65.82.78
 IPAD130,iPad 3G/Wifi (MD523B),2585eb80f9dc88788d210d44036d0bb129514748,iOS,Tablet,Apple,node002,10.65.82.80
+IPAD132,iPad mini (Model A1455),6b418fde17656c68d003f7e6dc1cc968f986368b,iOS,Tablet,Apple,node005,10.65.82.74
+IPAD133,iPad mini (Model A1455),9505e24793e451f3a7365f685a05f57d5aa8a5ca,iOS,Tablet,Apple,node004,10.65.82.76

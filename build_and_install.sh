@@ -38,23 +38,13 @@ if [ $1 ] && [ $2 ] && [ $3 ] && [ $4 ] && [ $5 ]; then
     echo "SEED_CONFIG: $5" >> settings.yaml
     update_build_xml $1 $2 $3 $4 $5
 else
-    echo "Please enter hostname for sql db"
-    read host
-    echo "Please enter database for sql db"
-    read dbname
-    echo "Please enter username for sql db"
-    read user
-    echo "Please enter password for sql db"
-    read pass
-    echo "Please enter seed configuration (dev, test, prod)"
-    read seedconf
 
-    echo "AUTOMATION_HOST: $host" > settings.yaml
-    echo "AUTOMATION_DB: $dbname" >> settings.yaml
-    echo "AUTOMATION_USER: $user" >> settings.yaml
-    echo "AUTOMATION_PASS: $pass" >> settings.yaml
-    echo "SEED_CONFIG: $seedconf" >> settings.yaml
-    update_build_xml $host $dbname $user $pass $seedconf
+    echo "AUTOMATION_HOST: $sqlhost" > settings.yaml
+    echo "AUTOMATION_DB: $sqldb" >> settings.yaml
+    echo "AUTOMATION_USER: $sqluser" >> settings.yaml
+    echo "AUTOMATION_PASS: $sqlpass" >> settings.yaml
+    echo "SEED_CONFIG: test" >> settings.yaml
+    update_build_xml $sqlhost $sqldb $sqluser $sqlpass "test"
 fi
 
 bundle install
