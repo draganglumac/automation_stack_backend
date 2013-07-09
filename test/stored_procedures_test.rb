@@ -41,5 +41,19 @@ context "Database" do
       asserts("ok") {dc.query("Call get_candidate_jobs()").count > 0}
     end
   end
+
+  context "update_job_run_time" do
+    asserts("ok") do
+      runtime = dc.query("select `trigger_time` from `jobs` where `id` = 1;").first["trigger_time"]
+      dc.query("call update_job_run_time(1);")
+      newtime = dc.query("select `trigger_time` from `jobs` where `id` = 1;").first["trigger_time"]
+      runtime == newtime
+
+      runtime = dc.query("select `trigger_time` from `jobs` where `id` = 2;").first["trigger_time"]
+      dc.query("call update_job_run_time(2);")
+      newtime = dc.query("select `trigger_time` from `jobs` where `id` = 2;").first["trigger_time"]
+      newtime == runtime + 3600
+    end
+  end 
 end   
 
