@@ -1,5 +1,5 @@
 call_sign,ip_address,platform,port,status
-node002, 10.65.82.2,ios,9090,OFFLINE
+node002,10.65.82.2,ios,9090,OFFLINE
 node003,10.65.82.3,ios,9090,OFFLINE
 node004,10.65.82.4,ios,9090,OFFLINE
 node005,10.65.82.5,ios,9090,OFFLINE
