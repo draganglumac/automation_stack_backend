@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `templates`(
 	`device_type_id` INT(11) NOT NULL,
 	`platform_id` INT(11) NOT NULL,
 	`commands` MEDIUMTEXT NULL DEFAULT NULL,
-	`main_result_file` varchar(45) NOT NULL,
+	`main_result_file` varchar(45) NULL DEFAULT NULL,
 	`email` varchar(64) NULL DEFAULT NULL,
 	PRIMARY KEY(`id`),
 	FOREIGN KEY `fk_template_project` (`project_id`) REFERENCES `projects`(`id`),
