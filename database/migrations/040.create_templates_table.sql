@@ -15,6 +15,11 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = latin1;
 
+ALTER TABLE `jobs` ADD COLUMN `template_id` INT(11) NULL;
+ALTER TABLE `jobs` ADD FOREIGN KEY `fk_template_for_job` (`template_id`) REFERENCES `templates` (`id`);
 
 --//@UNDO
+
+ALTER TABLE `jobs` DROP FOREIGN KEY `fk_template_for_job`;
+ALTER TABLE `jobs` DROP COLUMN `template_id`;
 DROP TABLE `templates`;
