@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `templates`(
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`project_id` INT(11) NOT NULL,
-	`device_type_id` INT(11) NOT NULL,
+	`device_type_id` INT(11) NULL,
 	`platform_id` INT(11) NOT NULL,
 	`commands` MEDIUMTEXT NULL DEFAULT NULL,
 	`main_result_file` varchar(45) NULL DEFAULT NULL,
