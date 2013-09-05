@@ -3,13 +3,13 @@ SM078,Galaxy Note II,RF1D185AKTY,Android,Phone,Samsung,,
 SM080,Galaxy Ace 2,RF1D14HT8VA,Android,Phone,Samsung,,
 SM083,Galaxy Note II LTE,R31CA1CNXFX,Android,Phone,Samsung,,
 SM086,Galaxy S III LTE,R31C91KT1HV,Android,Phone,Samsung,,
-SM088,Galaxy Tab 2,RF1D242ZJEXJ,Android,Tablet,Samsung,node010,10.65.82.64
+SM088,Galaxy Tab 2,c0808a5365bf021,Android,Tablet,Samsung,node010,10.65.82.64
 SM093,Galaxy S III Mini,RF1D15LHHSM,Android,Phone,Samsung,,
-SM094,Galaxy Tab 2,RF1D24ZJELX,Android,Tablet,Samsung,node011,10.65.82.61
+SM094,Galaxy Tab 2,c0808c1cf01f921,Android,Tablet,Samsung,node011,10.65.82.61
 SE014,Xperia T,CB5123DXXW,Android,Phone,Sony,,
 SE015,Xperia Z,CB5A1PE6E6,Android,Phone,Sony,node010,10.65.82.63
 LG005,P880,015d256469101607,Android,Phone,LG,,
-LG006,Nexus 4,016f47f49387ae60,Android,Phone,LG,node011,10.65.82.62
+LG006,Nexus 4,003dcabc8b17f3d1,Android,Phone,LG,node011,10.65.82.62
 AP056,iPhone 4,a62efb3a05919c8ab7ed8db771aecbcdad35787a,iOS,Phone,Apple,node008,10.65.82.67
 AP123,iPhone 5,63d12fa6fd304e43da871016c29c458243e3dede,iOS,Phone,Apple,,
 AP125,iPhone 4,4da28e9b670cd5fdabd1718f90b0be06153f1cf0,iOS,Phone,Apple,node005,10.65.82.73
