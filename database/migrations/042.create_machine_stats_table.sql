@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS `machine_stats`(
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`machine_id` INT(11) NOT NULL,
+	`firstpoll` INTEGER UNSIGNED NULL,
 	`polltime` INTEGER UNSIGNED,
 	`ping_success` BOOLEAN NOT NULL,
 	`mac_address` VARCHAR(18) NULL,
